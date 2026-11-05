@@ -1,4 +1,4 @@
-# HALVETH Bio-Universe · Foundation 0.1.0
+# HALVETH Bio-Universe · Foundation 0.1.1
 
 A local, read-only research center for selected HALVETH biological software branches. The package contains new catalog, interface, validation and transfer-preview code. It does **not** bundle any older laboratory source, personal genome data, biometric records, device keys or private run artifacts.
 
@@ -25,7 +25,7 @@ The `plugin.json` and `skills/bio-universe/SKILL.md` form a personal Codex plugi
 
 ## What the catalog means
 
-The dated catalog is a **finite selected snapshot**. `PUBLIC_REPOSITORY` means the named GitHub source location was reachable in the 2026-11-05 inventory; it is not a per-file license clearance. `LOCAL_PRIVATE` and `PRIVATE_REPOSITORY` nodes have no public source link. `LOCAL_REPORTED` relations come from local research reports. `CANDIDATE` and `HOLD` relations are not runnable integrations.
+The dated catalog is a **finite selected snapshot**. `PUBLIC_REPOSITORY` means the named GitHub source location was reachable in the 2026-11-05 inventory; it is not a per-file license clearance. `LOCAL_PRIVATE` and `PRIVATE_REPOSITORY` nodes have no public source link. `LOCAL_TESTED_LEGACY` denotes the isolated NOVA→Open-Organism Phase-3 adapter: its 11 tests passed again locally on 2026-11-05, including three tests that expose known trust gaps. `CANDIDATE` and `HOLD` relations are not runnable integrations.
 
 The typed packet contract in `lib/contract.mjs` validates a metadata-only envelope. `previewTransfer()` never executes a source lab or sends data. It rejects private raw data and keeps the one locally reported synthetic adapter at `PREVIEW_ONLY_EXTERNAL_ADAPTER_REQUIRED` until its actual source and runtime are separately bound.
 

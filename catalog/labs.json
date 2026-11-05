@@ -109,8 +109,8 @@
       "from": "nova-molecular-lineage",
       "to": "open-organism",
       "type": "SYNTHETIC_SOFTWARE_ADAPTER",
-      "status": "LOCAL_REPORTED",
-      "evidence": "Phase 3 und Phase 4.5 lokale Berichte; kein im Plugin ausgeführter Adapter",
+      "status": "LOCAL_TESTED_LEGACY",
+      "evidence": "Phase-3-Altpfad am 2026-11-05 isoliert erneut getestet: 11/11; drei Tests zeigen bekannte Vertrauenslücken. Phase 4.5 hier nicht erneut ausgeführt; kein Adapter im Plugin.",
       "description": "Quellengebundener Checkpoint wird als synthetische Referenz übernommen."
     },
     {

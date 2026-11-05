@@ -36,7 +36,7 @@ h3 { margin: 10px 0 19px; font-size: 1.35rem; letter-spacing: -.025em; }
 .source-link:hover { text-decoration: underline; }
 .relations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 365px), 1fr)); gap: 12px; }
 .relation { background: #101b22; border: 1px solid #31423f; border-radius: 15px; padding: 20px; }
-.relation.local_reported { border-left: 4px solid #69d7b1; }
+.relation.local_tested_legacy { border-left: 4px solid #69d7b1; }
 .relation.candidate { border-left: 4px solid #f6c96c; }
 .relation.hold { border-left: 4px solid #d8878c; }
 .relation-line { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; font-size: .95rem; }

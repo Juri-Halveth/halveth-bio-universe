@@ -13,7 +13,7 @@ const label = {
   OPTIONAL_PLUGIN: 'Optionales Plugin'
 };
 const status = {
-  LOCAL_REPORTED: 'Lokal berichtet', CANDIDATE: 'Kandidat', HOLD: 'Ausgesetzt'
+  LOCAL_TESTED_LEGACY: 'Lokal getesteter Altpfad', CANDIDATE: 'Kandidat', HOLD: 'Ausgesetzt'
 };
 
 const response = await fetch('/api/catalog');

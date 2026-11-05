@@ -8,7 +8,7 @@ test('catalog contains typed labs and valid relations', async () => {
   const catalog = await loadCatalog();
   assert.equal(catalog.labs.length, 9);
   assert.equal(catalog.relations.length, 6);
-  assert.equal(catalog.relations.filter(edge => edge.status === 'LOCAL_REPORTED').length, 1);
+  assert.equal(catalog.relations.filter(edge => edge.status === 'LOCAL_TESTED_LEGACY').length, 1);
 });
 
 test('rejects duplicate lab and unknown relation endpoints', async () => {
