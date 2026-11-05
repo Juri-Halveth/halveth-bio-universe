@@ -54,6 +54,14 @@ h3 { margin: 10px 0 19px; font-size: 1.35rem; letter-spacing: -.025em; }
 .result-sources { margin-top: 23px; color: #bce6ce; }
 .result-sources summary { cursor: pointer; font-weight: 750; }
 .result-sources .facts { margin-top: 13px; grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); }
+.genome-card, .genome-unconfigured { border: 1px solid #3f5570; background: linear-gradient(140deg, #162535, #111d28); border-radius: 18px; padding: 24px; }
+.genome-card h3 { font-size: 1.6rem; }
+.genome-testline { color: #c9d9f1; font-weight: 750; }
+.genome-truth { color: #e6e9df; margin-top: 22px; }
+.genome-coverage { color: #a7bacb; font-size: .84rem; line-height: 1.5; }
+.genome-tracks { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,310px),1fr)); gap: 10px; }
+.genome-tracks li { padding: 13px; background: #172b3b; border-radius: 10px; line-height: 1.5; }
+.genome-tracks span { color: #aac6d6; font-size: .8rem; }
 .next { background: #1b3835; border: 1px solid #447b68; border-radius: 20px; padding: 28px; margin-top: 54px; }
 .next .eyebrow { margin: 0 0 10px; }
 .next p:last-child { max-width: 850px; line-height: 1.6; color: #c6dcd1; }

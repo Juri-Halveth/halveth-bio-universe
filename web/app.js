@@ -100,6 +100,32 @@ for (const result of results) {
   card.append(facts, sources, make('p', 'result-boundary', 'Aussagegrenze: Referenzereignis in einem synthetischen Modell. Keine biologische Messung und keine Materialübertragung.'));
   byId('results').append(card);
 }
+const genomeResponse = await fetch('/api/genome-status');
+if (!genomeResponse.ok) throw new Error('Genomstatus nicht verfügbar');
+const genome = await genomeResponse.json();
+const genomeHost = byId('genome-status');
+if (!genome.configured) {
+  genomeHost.append(make('p', 'genome-unconfigured', 'Privater Status ist in diesem lokalen Serverlauf nicht eingebunden.'));
+} else {
+  const card = make('article', 'genome-card');
+  card.append(make('span', 'tag', 'LOKAL GEBUNDENER STATUS'), make('h3', '', `Genome Origin ${genome.software.version}`));
+  const tests = genome.software.tests;
+  card.append(make('p', 'genome-testline', tests.evidenceState === 'BOUND_PRIVATE_FILE'
+    ? `${tests.passed} Tests bestanden · ${tests.skipped} übersprungen · ${tests.failed} fehlgeschlagen`
+    : 'Testbeleg derzeit nicht gebunden'));
+  const truth = make('p', 'genome-truth', genome.truth.state === 'NO_ORTHOGONAL_REFERENCE_FOUND_IN_SCOPED_INVENTORY'
+    ? 'Unabhängige Wahrheitsreferenz: in der begrenzten Dateinamen-Inventur nicht gefunden.'
+    : 'Unabhängige Wahrheitsreferenz: Status offen.');
+  card.append(truth, make('p', 'genome-coverage', `Suchumfang: ${genome.truth.coverage}.`));
+  const tracks = make('ul', 'genome-tracks');
+  for (const track of genome.tracks) {
+    const item = make('li');
+    item.append(make('strong', '', track.label), make('span', '', ` · ${track.state === 'PRIVATE_RUN_RECORDED' ? 'Privater Bericht gebunden' : 'Belegprüfung offen'} · ${track.evidenceId}`));
+    tracks.append(item);
+  }
+  card.append(tracks, make('p', 'genome-coverage', `${genome.evidenceSummary.bound} private Belege gebunden · ${genome.evidenceSummary.changed} verändert · ${genome.evidenceSummary.unavailable} nicht verfügbar`));
+  genomeHost.append(card);
+}
 byId('snapshot').textContent = `Katalogstand ${catalog.asOf} · endlicher Ausschnitt`;
 byId('search').addEventListener('input', renderLabs);
 kindSelect.addEventListener('change', renderLabs);

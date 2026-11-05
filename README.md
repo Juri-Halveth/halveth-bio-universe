@@ -1,4 +1,4 @@
-# HALVETH Bio-Universe · Foundation 0.1.3
+# HALVETH Bio-Universe · Foundation 0.1.4
 
 A local, read-only research center for selected HALVETH biological software branches. The package contains new catalog, interface, validation and transfer-preview code. It does **not** bundle any older laboratory source, personal genome data, biometric records, device keys or private run artifacts.
 
@@ -20,6 +20,7 @@ node scripts/bio-universe.mjs list
 node scripts/bio-universe.mjs show genome-origin
 node scripts/bio-universe.mjs relations
 node scripts/bio-universe.mjs result
+node scripts/bio-universe.mjs genome-status
 ```
 
 The `plugin.json` and `skills/bio-universe/SKILL.md` form a personal Codex plugin candidate. Installation and updating the two existing personal plugins are separate steps.
@@ -39,6 +40,14 @@ npm run check
 
 The fixture's timestamp inside NOVA is fixed model input, not the wall-clock time of execution. The local execution time belongs in a separate run receipt. Re-running with the same bound bytes should recreate the same result digest.
 
+## Optional private Genome Origin status
+
+Set `HALVETH_BIO_PRIVATE_ROOT` to a local private Genome Origin run root before starting the server. The reader expects `BIO_UNIVERSE_STATUS/status.private.json` below that root. The manifest records Genome Origin version `0.6.8`, a test receipt, a scoped truth-source inventory and selected private report files as relative paths plus SHA-256 values. The file itself stays outside this repository. No private root is used by default.
+
+The reader checks the manifest and each selected evidence file with bounded reads. Only an allowlisted projection reaches `/api/genome-status`: version, test counts when their receipt matches, truth-inventory scope, track labels, opaque evidence IDs and match/hold states. It never returns the evidence paths, digests, report contents, variants, CRAM fingerprint or genotype calls. A changed or missing report yields `HOLD_EVIDENCE`; an unbound test receipt hides its counts. The local server loads the projection at startup, so restart it after changing the private manifest. The endpoint is available only on loopback and does not enable cross-origin reads.
+
+The private test receipt and report hashes establish file correspondence. They do not independently verify the reported biological measurements. The truth-source result means no orthogonal reference was identified in a **two-root filename and metadata inventory**, not that none exists anywhere.
+
 ## Source and rights boundary
 
 This repository's new code is MIT-licensed. Links to NOVA, Open Organism and WELTKEIMWERK identify external source trees; their code is not included. Some older HALVETH paths use different license terms. A later code merge needs a path, version, dependency and license check for every copied file. The two installed personal plugins are neighboring tools, not bundled dependencies.
@@ -49,4 +58,4 @@ Use the dashboard to choose one lab and one concrete result. The first source-bo
 
 ## Limitations
 
-The release scanner is an allowlist and pattern check, not a complete privacy or malware proof. The package has no device access, clinical interpretation, automatic access to local research data or independent proof that the legacy adapter's old trust gaps are closed. The v0.1.2 candidate discussed in a separate local review was unavailable as code here; this v0.1.3 descends directly from the verified v0.1.1 repository and is not claimed byte-equivalent to that candidate.
+The release scanner is an allowlist and pattern check, not a complete privacy or malware proof. The package has no device access, clinical interpretation or independent proof that the legacy adapter's old trust gaps are closed. The v0.1.2 candidate discussed in a separate local review was unavailable as code here; this branch descends directly from the verified v0.1.1 repository and is not claimed byte-equivalent to that candidate.
