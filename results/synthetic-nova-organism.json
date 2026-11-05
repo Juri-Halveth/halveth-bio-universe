@@ -1,0 +1,43 @@
+{
+  "schema": "halveth.bio-universe.result.v1",
+  "id": "nova-organism-synthetic-01",
+  "kind": "SYNTHETIC_LAB_RUN",
+  "evidenceState": "OBSERVED_LOCAL_SYNTHETIC",
+  "relationId": "nova-organism",
+  "sourceSet": "PHASE3_ISOLATED_ADAPTER_20261104",
+  "sourceDigests": {
+    "nova/engine.mjs": "9e37425738c3512362c235356bb830bb68291e523ce5fb2cac7913d7527fb15c",
+    "nova/data/sources.json": "5e9eef39fafbb37dcfab1a076c7821c77fb0bcd862f92fdaa6f51e782aa1e5bc",
+    "organism/src/open-world.mjs": "320e032bbc2acfbcd0cddfb1b78de02f5f199aff5911689d708f6c3088cba1c9",
+    "organism/src/sha256.mjs": "bc8ff9a75bc6452ad0e09ef44554a1d0df8f6ded6a52f918f28c9b981d1b9a3e",
+    "molecular_reference.mjs": "9af34652c14daf85d4a864b756674d36d2e23cfbbc6bcab32d20b3cdffd9e57b"
+  },
+  "fixture": {
+    "scenario": "catalase",
+    "seed": 127,
+    "checkpointStep": 32,
+    "modelClock": "MODEL_STEP"
+  },
+  "checkpoint": {
+    "validatedByOriginalNova": true,
+    "runDigest": "d67211d7853461aea3f79b9501761067248122dfee379dbfb1331597bd4a55d5",
+    "packetDigest": "92b44a593874cbdddf93944fdccd24ceba11b07d2e8c928078cbcac7e262e8dc",
+    "sourceEventsWithinViewedStep": 7
+  },
+  "transfer": {
+    "status": "RECORDED_MODEL_REFERENCE",
+    "bridgeId": "nova-reference:245071176b20bd9f4b885227b2c4c137042f2c426f8492c85f2ea70ce09bd9dd",
+    "targetEventId": "event:7a6d6d4af68041d3fefdea890b611dfeb18c405c7a91348e6cdf0597473e8b56",
+    "targetEventHash": "b43138b99871bd9303160fa098d5a891d0043dcd196abc63f72f384061a56134",
+    "worldHead": "b43138b99871bd9303160fa098d5a891d0043dcd196abc63f72f384061a56134",
+    "eventChainValid": true,
+    "eventCount": 2,
+    "entityCount": 0,
+    "resourceCount": 0,
+    "modelTimeMs": 0,
+    "materialTransfer": "NONE",
+    "biologyClaim": "NONE"
+  },
+  "claimCeiling": "Synthetic model reference observed in a bound local run; no measured biology or trusted production bridge.",
+  "resultDigest": "43110ff1611a0a4e735e9c887aec883ec643e9c4f72f7c6f787b29aa94e02014"
+}

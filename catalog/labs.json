@@ -110,7 +110,7 @@
       "to": "open-organism",
       "type": "SYNTHETIC_SOFTWARE_ADAPTER",
       "status": "LOCAL_TESTED_LEGACY",
-      "evidence": "Phase-3-Altpfad am 2026-11-05 isoliert erneut getestet: 11/11; drei Tests zeigen bekannte Vertrauenslücken. Phase 4.5 hier nicht erneut ausgeführt; kein Adapter im Plugin.",
+      "evidence": "Phase-3-Altpfad am 2026-11-05 isoliert erneut getestet: 11/11. Ein quellengebundener synthetischer Lauf erzeugte ein Open-Organism-Referenzereignis. Drei Tests zeigen bekannte Vertrauenslücken; Phase 4.5 hier nicht erneut ausgeführt, Adaptercode nicht gebündelt.",
       "description": "Quellengebundener Checkpoint wird als synthetische Referenz übernommen."
     },
     {

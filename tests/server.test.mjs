@@ -13,6 +13,8 @@ test('local server serves only bundled routes and refuses mutation', async () =>
     assert.match(page.headers.get('content-security-policy'), /default-src 'none'/);
     const api = await fetch(origin + '/api/catalog');
     assert.equal((await api.json()).labs.length, 9);
+    const results = await fetch(origin + '/api/results');
+    assert.equal((await results.json())[0].transfer.status, 'RECORDED_MODEL_REFERENCE');
     assert.equal((await fetch(origin + '/../../secret')).status, 404);
     assert.equal((await fetch(origin + '/api/catalog', { method: 'POST' })).status, 405);
   } finally { await new Promise(resolve => server.close(resolve)); }

@@ -1,0 +1,11 @@
+{
+  "schema": "halveth.bio-universe.synthetic-bindings.v1",
+  "sourceSet": "PHASE3_ISOLATED_ADAPTER_20261104",
+  "files": [
+    { "path": "nova/engine.mjs", "bytes": 11076, "sha256": "9e37425738c3512362c235356bb830bb68291e523ce5fb2cac7913d7527fb15c" },
+    { "path": "nova/data/sources.json", "bytes": 10273, "sha256": "5e9eef39fafbb37dcfab1a076c7821c77fb0bcd862f92fdaa6f51e782aa1e5bc" },
+    { "path": "organism/src/open-world.mjs", "bytes": 46593, "sha256": "320e032bbc2acfbcd0cddfb1b78de02f5f199aff5911689d708f6c3088cba1c9" },
+    { "path": "organism/src/sha256.mjs", "bytes": 3024, "sha256": "bc8ff9a75bc6452ad0e09ef44554a1d0df8f6ded6a52f918f28c9b981d1b9a3e" },
+    { "path": "molecular_reference.mjs", "bytes": 3935, "sha256": "9af34652c14daf85d4a864b756674d36d2e23cfbbc6bcab32d20b3cdffd9e57b" }
+  ]
+}

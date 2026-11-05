@@ -73,6 +73,33 @@ for (const edge of catalog.relations) {
   row.append(line, make('span', 'relation-status', status[edge.status]), make('p', '', edge.description), make('small', '', edge.evidence));
   relations.append(row);
 }
+const resultResponse = await fetch('/api/results');
+if (!resultResponse.ok) throw new Error('Ergebnisse nicht verfügbar');
+const results = await resultResponse.json();
+for (const result of results) {
+  const card = make('article', 'result-card');
+  card.append(make('span', 'tag', 'SYNTHETISCHER MODELLLAUF'), make('h3', '', 'NOVA → Open Organism'));
+  card.append(make('p', 'result-status', result.transfer.status));
+  const facts = make('dl', 'facts');
+  for (const [term, value] of [
+    ['NOVA-Verifier', result.checkpoint.validatedByOriginalNova ? 'Originalfunktion ausgeführt' : 'Nicht ausgeführt'],
+    ['Run-Digest', result.checkpoint.runDigest],
+    ['Checkpoint', result.checkpoint.packetDigest],
+    ['Quellereignisse', String(result.checkpoint.sourceEventsWithinViewedStep)],
+    ['World-Ereignis', result.transfer.targetEventHash],
+    ['Eventkette', result.transfer.eventChainValid ? 'Geprüft' : 'Offen'],
+    ['Entitäten / Ressourcen', `${result.transfer.entityCount} / ${result.transfer.resourceCount}`],
+    ['Modellzeit', `${result.transfer.modelTimeMs} ms`],
+    ['Resultat-Digest', result.resultDigest]
+  ]) facts.append(make('dt', '', term), make('dd', '', value));
+  const sources = make('details', 'result-sources');
+  sources.append(make('summary', '', 'Gebundene Quellbytes und SHA-256'));
+  const sourceList = make('dl', 'facts');
+  for (const [path, sha] of Object.entries(result.sourceDigests)) sourceList.append(make('dt', '', path), make('dd', '', sha));
+  sources.append(sourceList);
+  card.append(facts, sources, make('p', 'result-boundary', 'Aussagegrenze: Referenzereignis in einem synthetischen Modell. Keine biologische Messung und keine Materialübertragung.'));
+  byId('results').append(card);
+}
 byId('snapshot').textContent = `Katalogstand ${catalog.asOf} · endlicher Ausschnitt`;
 byId('search').addEventListener('input', renderLabs);
 kindSelect.addEventListener('change', renderLabs);
