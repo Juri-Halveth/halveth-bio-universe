@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, writeFile, realpath, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, isAbsolute, join, relative, sep } from 'node:path';
-import { loadPrivateGenomeStatus, validatePrivateManifest } from '../lib/private-genome-status.mjs';
+import { loadPrivateGenomeStatus, validatePrivateManifest, validatePrivateGenomeResult } from '../lib/private-genome-status.mjs';
 import { startServer } from '../lib/server.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -66,6 +66,74 @@ test('manifest rejects unrecognized genomic detail and path escape', async () =>
     assert.throws(() => validatePrivateManifest({ ...manifest, rawAlleles: 'A/G' }), /schema mismatch/);
     manifest.evidence[0].relativePath = '../secret.txt';
     assert.throws(() => validatePrivateManifest(manifest), /evidence item invalid/);
+  } finally {
+    const base = await realpath(tmpdir());
+    const actual = await realpath(root);
+    const gap = relative(base, actual);
+    if (basename(actual).startsWith('halveth-genome-status-test-') && gap !== '..' && !gap.startsWith('..' + sep) && !isAbsolute(gap)) await rm(actual, { recursive: true, force: true });
+  }
+});
+
+test('private discordance result is projected only while both evidence files match', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'halveth-genome-status-test-'));
+  try {
+    const manifest = await fixture(root);
+    const audit = 'synthetic audit, no individual alleles';
+    const source = 'synthetic private result';
+    const sensitivity = 'synthetic private sensitivity';
+    const summary = {
+      schema: 'halveth.bio-universe.genome-discordance-summary.v1',
+      selectedMarkers: 8, exportMethod: 'Low-pass Whole Genome Sequencing',
+      groups: {
+        long: { markers: 4, q20Bases: 40, q30Bases: 20, q30Discordant: 1,
+          q20to29Discordant: 2, zeroDepthMarkers: 1 },
+        short: { markers: 4, q20Bases: 50, q30Bases: 35, q30Discordant: 1,
+          q20to29Discordant: 0, zeroDepthMarkers: 0 }
+      },
+      supplementaryExcluded: {
+        long: { q30Bases: 19, q30Discordant: 1 },
+        short: { q30Bases: 34, q30Discordant: 1 }
+      },
+      chromosomeBootstrap95: [-0.03, 0.08],
+      sourceResultSha256: sha(source), sensitivitySha256: sha(sensitivity),
+      auditSha256: sha(audit)
+    };
+    const sumText = JSON.stringify(summary);
+    const auditPath = join(root, 'BIO_UNIVERSE_STATUS', 'discordance-audit.md');
+    const summaryPath = join(root, 'BIO_UNIVERSE_STATUS', 'discordance-summary.private.json');
+    const sourcePath = join(root, 'BIO_UNIVERSE_STATUS', 'discordance-source.private.json');
+    const sensitivityPath = join(root, 'BIO_UNIVERSE_STATUS', 'discordance-sensitivity.private.json');
+    await writeFile(auditPath, audit);
+    await writeFile(summaryPath, sumText);
+    await writeFile(sourcePath, source);
+    await writeFile(sensitivityPath, sensitivity);
+    manifest.schema = 'halveth.bio-universe.genome-private.v2';
+    manifest.result = { id: 'homo-ref-discordance', sourceEvidenceId: 'GO-DISC-RESULT',
+      sensitivityEvidenceId: 'GO-DISC-SENS', summaryEvidenceId: 'GO-DISC-SUM',
+      auditEvidenceId: 'GO-DISC-AUDIT' };
+    manifest.evidence.push(
+      { id: 'GO-DISC-RESULT', relativePath: 'BIO_UNIVERSE_STATUS/discordance-source.private.json', sha256: sha(source) },
+      { id: 'GO-DISC-SENS', relativePath: 'BIO_UNIVERSE_STATUS/discordance-sensitivity.private.json', sha256: sha(sensitivity) },
+      { id: 'GO-DISC-AUDIT', relativePath: 'BIO_UNIVERSE_STATUS/discordance-audit.md', sha256: sha(audit) },
+      { id: 'GO-DISC-SUM', relativePath: 'BIO_UNIVERSE_STATUS/discordance-summary.private.json', sha256: sha(sumText) }
+    );
+    await writeFile(join(root, 'BIO_UNIVERSE_STATUS', 'status.private.json'), JSON.stringify(manifest));
+    const projected = await loadPrivateGenomeStatus(root);
+    assert.equal(projected.result.state, 'PRIVATE_MEASUREMENT_RECORDED');
+    assert.equal(projected.result.discordance.state, 'DISCORDANCE_INCONCLUSIVE');
+    assert.equal(projected.result.lowerQuality.long.bases, 20);
+    assert.equal(projected.result.supplementaryExcluded.long.q30Discordant, 1);
+    assert.doesNotMatch(JSON.stringify(projected), /relativePath|sha256|private\.json|discordance-audit|synthetic result|[a-f0-9]{64}/);
+    await writeFile(summaryPath, 'changed summary');
+    const held = await loadPrivateGenomeStatus(root);
+    assert.deepEqual(held.result, { state: 'HOLD_EVIDENCE' });
+    assert.doesNotMatch(JSON.stringify(held), /q30Discordant|selectedMarkers/);
+    await writeFile(summaryPath, sumText);
+    await writeFile(sourcePath, 'tampered source');
+    assert.deepEqual((await loadPrivateGenomeStatus(root)).result, { state: 'HOLD_EVIDENCE' });
+    assert.throws(() => validatePrivateGenomeResult({ ...summary, rawAllele: 'A/G' }, sha(audit)), /schema mismatch/);
+    assert.throws(() => validatePrivateGenomeResult({ ...summary, groups: { ...summary.groups,
+      long: { ...summary.groups.long, q30Bases: 0 } } }, sha(audit)), /count relationship invalid/);
   } finally {
     const base = await realpath(tmpdir());
     const actual = await realpath(root);

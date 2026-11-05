@@ -54,6 +54,7 @@ h3 { margin: 10px 0 19px; font-size: 1.35rem; letter-spacing: -.025em; }
 .result-sources { margin-top: 23px; color: #bce6ce; }
 .result-sources summary { cursor: pointer; font-weight: 750; }
 .result-sources .facts { margin-top: 13px; grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); }
+.genome-status { display: grid; gap: 14px; }
 .genome-card, .genome-unconfigured { border: 1px solid #3f5570; background: linear-gradient(140deg, #162535, #111d28); border-radius: 18px; padding: 24px; }
 .genome-card h3 { font-size: 1.6rem; }
 .genome-testline { color: #c9d9f1; font-weight: 750; }

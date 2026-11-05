@@ -125,6 +125,29 @@ if (!genome.configured) {
   }
   card.append(tracks, make('p', 'genome-coverage', `${genome.evidenceSummary.bound} private Belege gebunden · ${genome.evidenceSummary.changed} verändert · ${genome.evidenceSummary.unavailable} nicht verfügbar`));
   genomeHost.append(card);
+  const measured = genome.result;
+  if (measured.state === 'PRIVATE_MEASUREMENT_RECORDED') {
+    const evidence = make('article', 'result-card');
+    evidence.append(make('span', 'tag', 'PRIVATER MESSLAUF'),
+      make('h3', '', 'Genome Origin · Diskordanzprobe'),
+      make('p', 'result-status', `${measured.selectedMarkers} vorab gewählte Positionen · ${measured.discordance.state === 'DISCORDANCE_INCONCLUSIVE' ? 'Abweichungsunterschied nicht belegt' : 'Auswertung offen'}`));
+    const facts = make('dl', 'facts');
+    const percent = value => `${(100 * value).toLocaleString('de-DE', { maximumFractionDigits: 2 })} %`;
+    for (const [term, value] of [
+      ['Q30 unter BQ ≥ 20 · lang / kurz', `${percent(measured.quality.longQ30Fraction)} / ${percent(measured.quality.shortQ30Fraction)}`],
+      ['Abweichende Q30-Basen · lang / kurz', `${measured.discordance.long.discordant}/${measured.discordance.long.bases} / ${measured.discordance.short.discordant}/${measured.discordance.short.bases}`],
+      ['Differenz lang minus kurz', `${(100 * measured.discordance.longMinusShort).toLocaleString('de-DE', { maximumFractionDigits: 4 })} Prozentpunkte`],
+      ['Chromosomen-Bootstrap 95 %', `${percent(measured.discordance.chromosomeBootstrap95[0])} bis ${percent(measured.discordance.chromosomeBootstrap95[1])}`],
+      ['Ohne supplementäre Alignments · lang / kurz', `${measured.supplementaryExcluded.long.q30Discordant}/${measured.supplementaryExcluded.long.q30Bases} / ${measured.supplementaryExcluded.short.q30Discordant}/${measured.supplementaryExcluded.short.q30Bases}`],
+      ['BQ20–29 · lang / kurz', `${measured.lowerQuality.long.discordant}/${measured.lowerQuality.long.bases} / ${measured.lowerQuality.short.discordant}/${measured.lowerQuality.short.bases}`],
+      ['Nulltiefe · lang / kurz', `${measured.zeroDepthMarkers.long} / ${measured.zeroDepthMarkers.short}`]
+    ]) facts.append(make('dt', '', term), make('dd', '', value));
+    evidence.append(facts, make('p', 'result-boundary',
+      'Export und CRAM stammen vom selben Anbieter. Diskordanz gegen Exportcalls ist keine unabhängig validierte Sequenzierungsfehlerrate; eine externe Wahrheitsreferenz fehlt im begrenzten Suchumfang.'));
+    genomeHost.append(evidence);
+  } else if (measured.state === 'HOLD_EVIDENCE') {
+    genomeHost.append(make('p', 'genome-unconfigured', 'Messresultat: private Belegbindung offen.'));
+  }
 }
 byId('snapshot').textContent = `Katalogstand ${catalog.asOf} · endlicher Ausschnitt`;
 byId('search').addEventListener('input', renderLabs);
