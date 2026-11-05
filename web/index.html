@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HALVETH · Bio-Universe</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header>
+    <div class="brand"><img src="/icon.svg" alt=""><span>HALVETH / LUCINET</span></div>
+    <p class="eyebrow">FORSCHUNGSZENTRALE · LOKAL</p>
+    <h1>Bio-Universe</h1>
+    <p class="lead">Was kann jedes Labor wirklich? Welche Verbindungen sind geprüft? Was bringt uns als Nächstes zu einem sichtbaren Ergebnis?</p>
+    <div class="summary" id="summary" aria-live="polite"></div>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="Laborfilter">
+      <label for="search">Labor suchen</label><input id="search" type="search" placeholder="Name, Funktion, Ziel …">
+      <label for="kind">Bereich</label><select id="kind"><option value="">Alle Bereiche</option></select>
+    </section>
+    <section aria-labelledby="labs-title"><div class="section-heading"><div><p class="eyebrow">01 / BESTAND</p><h2 id="labs-title">Labore und Werkzeuge</h2></div><p>Quellstatus und Aussagegrenze stehen bei jedem Eintrag.</p></div><div class="grid" id="labs"></div></section>
+    <section aria-labelledby="relations-title"><div class="section-heading"><div><p class="eyebrow">02 / VERBINDUNGEN</p><h2 id="relations-title">Brücken mit Status</h2></div><p>Eine Kandidatenkante ist noch keine ausführbare Integration.</p></div><div class="relations" id="relations"></div></section>
+    <section class="next" aria-labelledby="next-title"><p class="eyebrow">03 / NÄCHSTER NUTZEN</p><h2 id="next-title">Von Infrastruktur zurück zur Forschung</h2><p>Die Provenienzbrücke bleibt als geprüfter synthetischer Stand erhalten. Das nächste sichtbare Ergebnis ist ein quellengebundener Laborlauf; für Genome Origin zählt eine neue unabhängige biologische Gegenprobe. BIO-LOCK braucht einen getrennten Sensor- und Probenherkunftstest.</p></section>
+  </main>
+  <footer><span id="snapshot"></span><span>Keine persönlichen DNA-Daten · keine Telemetrie · nur 127.0.0.1</span></footer>
+</body>
+</html>

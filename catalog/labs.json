@@ -1,0 +1,162 @@
+{
+  "schema": "halveth.bio-universe.catalog.v1",
+  "asOf": "2026-11-05",
+  "scope": "SELECTED_FOUNDATIONS_FINITE_SNAPSHOT",
+  "labs": [
+    {
+      "id": "genome-origin",
+      "name": "Genome Origin",
+      "kind": "MEASUREMENT_SOFTWARE",
+      "dataClass": "RESTRICTED_RAW",
+      "sourceState": "LOCAL_PRIVATE",
+      "sourceUrl": null,
+      "functions": ["CRAM- und Export-Abgleich", "Read-Qualität und Allelstützung", "Zurückgehaltene Modellprüfung"],
+      "claimCeiling": "Code und lokale Berichte; individuelle Messwerte bleiben im privaten Laufraum.",
+      "nextOutcome": "Unabhängige Wahrheitsreferenz und nachvollziehbarer neuer biologischer Befund."
+    },
+    {
+      "id": "nova-molecular-lineage",
+      "name": "NOVA Molecular Lineage",
+      "kind": "MOLECULAR_MODEL",
+      "dataClass": "PUBLIC_SOURCE",
+      "sourceState": "PUBLIC_REPOSITORY",
+      "sourceUrl": "https://github.com/Juri-Halveth/lucinet-seedspace/tree/main/nova/labs/molecular-lineage",
+      "functions": ["Molekül- und Quellenbeziehungen", "Synthetische Checkpoints"],
+      "claimCeiling": "Quellgebundenes Softwaremodell; keine gemessene Biochemie.",
+      "nextOutcome": "Ein quellengebundener Modellvergleich mit eigener Gegenprobe."
+    },
+    {
+      "id": "open-organism",
+      "name": "Open Organism",
+      "kind": "LIFE_SIMULATION",
+      "dataClass": "PUBLIC_SOURCE",
+      "sourceState": "PUBLIC_REPOSITORY_RIGHTS_REVIEW",
+      "sourceUrl": "https://github.com/Juri-Halveth/halveth-scarlet",
+      "functions": ["Ressourcen- und Ereigniszustände", "Symbolische genetische Übersetzung"],
+      "claimCeiling": "Simulation; keine menschliche Genom- oder Zellmessung.",
+      "nextOutcome": "Ein dokumentierter Lauf mit typisiertem Eingang und Modellgrenzen."
+    },
+    {
+      "id": "weltkeimwerk",
+      "name": "WELTKEIMWERK",
+      "kind": "LIFE_SIMULATION",
+      "dataClass": "PUBLIC_SOURCE",
+      "sourceState": "PUBLIC_REPOSITORY_RIGHTS_REVIEW",
+      "sourceUrl": "https://github.com/Juri-Halveth/halveth-scarlet/tree/main/forschung/weltkeimwerk",
+      "functions": ["Digitale Zellen und Signale", "Simuliertes Genom"],
+      "claimCeiling": "Digitales Modellgenom; keine individuelle DNA.",
+      "nextOutcome": "Vergleichbare Simulationszustände mit Open Organism."
+    },
+    {
+      "id": "banana-transition",
+      "name": "Banana Transition Field",
+      "kind": "BIOLOGICAL_MODEL",
+      "dataClass": "INTERNAL_PSEUDONYMIZED",
+      "sourceState": "PRIVATE_REPOSITORY",
+      "sourceUrl": null,
+      "functions": ["Illustratives Reifungsmodell", "Konservativer Austausch"],
+      "claimCeiling": "Modell und synthetische Tests; keine Pflanzenmessung.",
+      "nextOutcome": "Modellvariablen gegen ein echtes Beobachtungsprotokoll abgleichen."
+    },
+    {
+      "id": "bio-lock",
+      "name": "BIO-LOCK",
+      "kind": "SECURITY_PROTOTYPE",
+      "dataClass": "INTERNAL_PSEUDONYMIZED",
+      "sourceState": "LOCAL_PRIVATE",
+      "sourceUrl": null,
+      "functions": ["Synthetische Identitäts- und Sitzungsprüfung", "Policy-Gegenproben"],
+      "claimCeiling": "Softwareprototyp; kein verifizierter DNA-Sensor oder Aktuator.",
+      "nextOutcome": "Getrennter Hardware-Teststand und Probenherkunftsnachweis."
+    },
+    {
+      "id": "provenance-bridge",
+      "name": "Provenance Bridge",
+      "kind": "INFRASTRUCTURE",
+      "dataClass": "INTERNAL_PSEUDONYMIZED",
+      "sourceState": "LOCAL_PRIVATE",
+      "sourceUrl": null,
+      "functions": ["Synthetische Proof-Outbox", "Neustart-Recovery von 10.000 Referenzen"],
+      "claimCeiling": "Hostlokal getestete Infrastruktur; kein externer unabhängiger Witness.",
+      "nextOutcome": "Als Infrastrukturstand einfrieren und für konkrete Laborergebnisse verwenden."
+    },
+    {
+      "id": "rachel-auftragssystem",
+      "name": "Rachel Auftragssystem",
+      "kind": "OPTIONAL_PLUGIN",
+      "dataClass": "LOCAL_ONLY",
+      "sourceState": "INSTALLED_PERSONAL_PLUGIN",
+      "sourceUrl": null,
+      "functions": ["Auftragsboard", "Getrenntes Chrono-Ledger"],
+      "claimCeiling": "Optionaler Nachbar; kein automatischer Datenaustausch.",
+      "nextOutcome": "Später einen ausdrücklich gebundenen Auftragsadapter prüfen."
+    },
+    {
+      "id": "perspective-corridor",
+      "name": "HALVETH Perspektivkorridor",
+      "kind": "OPTIONAL_PLUGIN",
+      "dataClass": "LOCAL_ONLY",
+      "sourceState": "INSTALLED_PERSONAL_PLUGIN",
+      "sourceUrl": null,
+      "functions": ["Vier synthetische Ansichten", "Punktidentitäts-Abgleich"],
+      "claimCeiling": "Szenenprüfung; keine biologische Messmethode.",
+      "nextOutcome": "Später für Visualisierung mit separatem Typvertrag anschließen."
+    }
+  ],
+  "relations": [
+    {
+      "id": "nova-organism",
+      "from": "nova-molecular-lineage",
+      "to": "open-organism",
+      "type": "SYNTHETIC_SOFTWARE_ADAPTER",
+      "status": "LOCAL_REPORTED",
+      "evidence": "Phase 3 und Phase 4.5 lokale Berichte; kein im Plugin ausgeführter Adapter",
+      "description": "Quellengebundener Checkpoint wird als synthetische Referenz übernommen."
+    },
+    {
+      "id": "organism-weltkeimwerk",
+      "from": "open-organism",
+      "to": "weltkeimwerk",
+      "type": "SIMULATION_COMPARISON",
+      "status": "CANDIDATE",
+      "evidence": "Typ- und Modellzeitbrücke offen",
+      "description": "Zwei getrennte künstliche Lebensmodelle könnten vergleichbar gemacht werden."
+    },
+    {
+      "id": "genome-bridge",
+      "from": "genome-origin",
+      "to": "provenance-bridge",
+      "type": "MINIMIZED_RECEIPT",
+      "status": "CANDIDATE",
+      "evidence": "Kein geprüfter Datenvertrag",
+      "description": "Nur minimierte private Run-Receipts, niemals Allelzeichen im öffentlichen Katalog."
+    },
+    {
+      "id": "genome-biolock",
+      "from": "genome-origin",
+      "to": "bio-lock",
+      "type": "PHYSICAL_SENSOR_BRIDGE",
+      "status": "HOLD",
+      "evidence": "Sensor, Frische und Geräteattestierung offen",
+      "description": "Eine CRAM-Datei belegt keine gerade anwesende Person."
+    },
+    {
+      "id": "rachel-planning",
+      "from": "rachel-auftragssystem",
+      "to": "provenance-bridge",
+      "type": "OPTIONAL_TASK_ADAPTER",
+      "status": "CANDIDATE",
+      "evidence": "Plugin-Anschluss noch nicht implementiert",
+      "description": "Forschungsaufträge könnten später als getrennte Aufgaben geführt werden."
+    },
+    {
+      "id": "corridor-visual",
+      "from": "perspective-corridor",
+      "to": "open-organism",
+      "type": "OPTIONAL_VISUALIZATION",
+      "status": "CANDIDATE",
+      "evidence": "Keine geprüfte 3D-Zustandsbrücke",
+      "description": "Modellzustände könnten später als gebundene Szenen dargestellt werden."
+    }
+  ]
+}

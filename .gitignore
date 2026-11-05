@@ -1,0 +1,12 @@
+node_modules/
+runtime/
+private/
+*.cram
+*.bam
+*.fastq
+*.vcf
+*.sqlite
+*.db
+*.key
+*.pem
+*.zip
