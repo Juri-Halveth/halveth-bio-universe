@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const allowed = new Set([
+  '.github/workflows/source-checks.yml',
   '.gitignore', 'LICENSE', 'README.md', 'package.json', 'plugin.json', 'assets/icon.svg',
   'catalog/labs.json', 'catalog/synthetic-source-bindings.json', 'lib/catalog.mjs', 'lib/contract.mjs', 'lib/local-result.mjs', 'lib/private-genome-status.mjs', 'lib/server.mjs',
   'results/synthetic-nova-organism.json', 'scripts/bio-universe.mjs', 'scripts/generate-local-result.mjs', 'scripts/release-check.mjs',
