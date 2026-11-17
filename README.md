@@ -2,6 +2,11 @@
 
 A local, read-only research center for selected HALVETH biological software branches. The package contains new catalog, interface, validation and transfer-preview code. It does **not** bundle any older laboratory source, personal genome data, biometric records, device keys or private run artifacts.
 
+**Public HALVETH context:** [Network search](https://juri-halveth.github.io/suche/) · [Portfolio](https://juri-halveth.github.io/).
+The shared search covers public repository metadata, reviewed source descriptions
+and selected public entry points. Its coverage and source dates are stated in the
+index; dated descriptions are available through the archive selection.
+
 ## Run
 
 Requires Node.js 20 or newer. No packages to install and no network connection is needed.
