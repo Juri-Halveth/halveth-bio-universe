@@ -55,7 +55,7 @@ The private test receipt and report hashes establish file correspondence. The re
 
 ## Source and rights boundary
 
-This repository's new code is MIT-licensed. Links to NOVA, Open Organism and WELTKEIMWERK identify external source trees; their code is not included. Some older HALVETH paths use different license terms. A later code merge needs a path, version, dependency and license check for every copied file. The two installed personal plugins are neighboring tools, not bundled dependencies.
+This repository's new code is [MIT-licensed](LICENSE). Links to NOVA, Open Organism and WELTKEIMWERK identify external source trees; their code is not included. Some older HALVETH paths use different license terms. A later code merge needs a path, version, dependency and license check for every copied file. The two installed personal plugins are neighboring tools, not bundled dependencies.
 
 ## Immediate research use
 
